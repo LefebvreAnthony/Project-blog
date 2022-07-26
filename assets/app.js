@@ -10,3 +10,18 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+//Attendre que le doc charge avant de lancer les fonctions
+document.addEventListener('DOMContentLoaded', () => {
+    enableDropDown();
+});
+
+const enableDropDown = () => {
+    const menu = document.querySelector('header > nav > ul');
+    const list = document.querySelectorAll('.dropDown');
+    list.forEach(el => {
+        el.addEventListener("click", () => {
+            menu.classList.toggle('hidden');
+        })
+    });
+};
