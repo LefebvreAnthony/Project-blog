@@ -17,11 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const enableDropDown = () => {
-    const menu = document.querySelector('header > nav > ul');
-    const list = document.querySelectorAll('.dropDown');
-    list.forEach(el => {
-        el.addEventListener("click", () => {
-            menu.classList.toggle('hidden');
-        })
-    });
+    const btnToggle = document.getElementById('btn-toggle');
+    const nav = document.getElementById('nav');
+    btnToggle.addEventListener("click", () => { nav.classList.toggle('hidden') });
 };
