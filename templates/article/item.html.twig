@@ -2,18 +2,18 @@
 
 <article class="mb-5">
     <div class="grid grid-cols-12">
-        <div class="col-span-5">
+        <div class="col-span-{{ leftCol ?? 5 }}">
             {% if article.featuredImage %}
                 <a href="{{ article_show }}">
                     <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy">
                 </a>
             {% endif %}
         </div>
-        <div class="col-span-7">
+        <div class="col-span-{{ rightCol ?? 7 }}">
             <h2>
                 <a href="{{ article_show }}">{{ article.title }}</a>
             </h2>
-            <p>
+            <p class="text-sm">
                 {{ article.createdAt|date('D M Y') }}
             </p>
             {{ article.featuredText ?: article.content|striptags|slice(0,130) ~ '...'}}

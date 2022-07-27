@@ -6,6 +6,7 @@ use App\Entity\Article;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
@@ -23,6 +24,7 @@ class ArticleCrudController extends AbstractCrudController
             SlugField::new('slug')->setTargetFieldName('title'),
             TextEditorField::new('content'),
             TextField::new('featuredText'),
+            AssociationField::new('categories'),
             DateTimeField::new('createdAt')->hideOnForm(),
             DateTimeField::new('UpdatedAt')->hideOnForm(),
         ];

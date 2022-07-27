@@ -1,11 +1,10 @@
 <div class="p-4">
     <h4>Categories</h4>
     <ol class="mb-0 text-gray-50">
-        <li>
-            <a href="">Tutorial C#</a>
-        </li>
-        <li>
-            <a href="">Tutorial Symfony</a>
-        </li>
+        {% for category in categories %}
+            <li>
+                <a href="{{ path('category_show', { slug: category.slug }) }}">{{ category.name }}</a>
+            </li>
+        {% endfor %}
     </ol>
 </div>
