@@ -3,6 +3,21 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <main>
+    <main class="p-4">
+        <div class="grid grid-cols-12 grid-rows-1">
+            <div class="col-span-8 lg:col-span-10">
+                <h3 class="italic pb-4 mb-4">New article</h3>
+                <div id="article-list">
+                    {% include 'article/list.html.twig' with { articles } %}
+                </div>
+                <hr class="sm:mx-auto">
+            </div>
+            <div class="col-start-9 col-span-4 lg:col-start-11 lg:col-span-2">
+                <div class="sticky top-8">
+                    {% include "widget/about.html.twig" %}
+                    {% include "widget/categories.html.twig" %}
+                </div>
+            </div>
+        </div>
     </main>
 {% endblock %}

@@ -13,7 +13,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="text-4xl bg-primary text-gray-50 ">
+    <body class="text-xl md:text-2xl bg-primary text-gray-50 ">
         <header class="">
             <nav class="flex items-center justify-between flex-wrap bg-gray-50 p-6">
                 <div class="flex items-center flex-shrink-0 text-primary mr-6">
@@ -43,7 +43,7 @@
                     </button>
                 </div>
                 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                    <ul id="nav" class="text-sm lg:flex-grow hidden lg:inline-flex">
+                    <ul id="nav" class="text-xl md:text-2xl lg:flex-grow hidden lg:inline-flex">
                     <li>
                     <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
                         My blog
@@ -52,12 +52,12 @@
                     <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
                         Category
                     </a>
-                    <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300">
-                        Account
+                    <a href="{{ path('admin') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300">
+                        Dashboard
                     </a>
                     </div>
                     <div>
-                    <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-primary border-primary hover:border-transparent hover:text-white hover:bg-primary mt-4 lg:mt-0">Se connecter</a>
+                    <a href="#" class="inline-block text-xl md:text-2xl px-4 py-2 leading-none border rounded text-primary border-primary hover:border-transparent hover:text-white hover:bg-primary mt-4 lg:mt-0">Se connecter</a>
                     </div>
                 </div>
             </nav>
