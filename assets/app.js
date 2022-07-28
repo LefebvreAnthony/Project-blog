@@ -13,11 +13,40 @@ import './bootstrap';
 
 //Attendre que le doc charge avant de lancer les fonctions
 document.addEventListener('DOMContentLoaded', () => {
-    enableDropDown();
+    new App();
 });
 
-const enableDropDown = () => {
-    const btnToggle = document.getElementById('btn-toggle');
-    const nav = document.getElementById('nav');
-    btnToggle.addEventListener("click", () => { nav.classList.toggle('hidden') });
-};
+class App {
+    constructor() {
+        this.enableDropDowns();
+        this.handleCommentForm();
+    }
+    enableDropDowns() {
+
+        const btnToggle = document.getElementById('btn-toggle');
+        const nav = document.getElementById('nav');
+        btnToggle.addEventListener("click", () => { nav.classList.toggle('hidden') });
+    }
+
+    handleCommentForm() {
+        const commentForm = document.querySelector('form.comment-form');
+
+        if (null == commentForm) return;
+
+        commentForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const response = await fetch('/ajax/comments', {
+                method: 'POST',
+                body: new FormData(e.target),
+            });
+
+            if (!response.ok) return;
+
+            const json = await response.json();
+
+            console.log(json);
+        })
+
+    }
+}

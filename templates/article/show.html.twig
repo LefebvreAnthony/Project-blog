@@ -3,10 +3,18 @@
 {% block title %} {{article.title}} {% endblock %}
 
 {% block body %}
-    <div class="">
+    <main class=" px-8">
         <h1>{{ article.title }}</h1>
-        <hr>
+        <hr  class="mb-4 mt-4">
 
         {{ article.content|raw }}
-    </div>
+
+        <h2 class="comment-title">
+            <span id="comment-count">{{ article.comments|length }} comment(s)</span>
+        </h2>
+        <hr class="mb-4 mt-4">
+        <div class="comment-area mb-5">
+            {{ form(commentForm, { 'attr': { 'class': 'comment-form' } }) }}
+        </div>
+    </main>
 {% endblock %}
