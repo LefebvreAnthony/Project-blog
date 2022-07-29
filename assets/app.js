@@ -45,7 +45,17 @@ class App {
 
             const json = await response.json();
 
-            console.log(json);
+            if (json.code == 'COMMENT_ADDED_SUCCESFULLY') {
+                const commentList = document.querySelector('.comment-list');
+                const commentCount = document.querySelector('.comment-count');
+                const commentContent = document.querySelector('#comment_content');
+
+                commentList.insertAdjacentHTML('beforeend', json.message);
+                commentList.lastElementChild.scrollIntoView();
+                commentCount.innerText = json.numberOfComment;
+                commentContent.value = '';
+
+            }
         })
 
     }

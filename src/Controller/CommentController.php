@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
+use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     #[Route('/ajax/comments', name: 'comment_add')]
-    public function index(Request $request, ArticleRepository $articleRepo): Response
+    public function index(Request $request, ArticleRepository $articleRepo, CommentRepository $commentRepo, EntityManagerInterface $em, UserRepository $userRepo): Response
     {
         $commentData = $request->request->all('comment');
 
@@ -29,11 +32,20 @@ class CommentController extends AbstractController
 
         $comment = new Comment($article);
         $comment->setContent($commentData['content']);
+        $comment->setUser($userRepo->findOneBy(['id' => 1]));
         $comment->setCreatedAt(new DateTime());
-        $comment-
 
-        return $this->render('comment/index.html.twig', [
-            'controller_name' => 'CommentController',
+        $em->persist($comment);
+        $em->flush();
+
+        $html = $this->renderView('comment/index.html.twig', [
+            'comment' => $comment
+        ]);
+
+        return $this->json([
+            'code' => 'COMMENT_ADDED_SUCCESFULLY',
+            'message' => $html,
+            'numberOfComment' => $commentRepo->count(['article' => $article]),
         ]);
     }
 }
