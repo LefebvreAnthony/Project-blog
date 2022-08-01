@@ -1,3 +1,12 @@
+{% set menus = menu_service.findAll %}
+
+{# {% for menu in menus %}
+    {{ dump(menu.subMenus.count) }}
+     {% for subMenu in menu.subMenus %}
+        {{ dump(subMenu) }}
+     {% endfor %}
+{% endfor %} #}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,6 +53,27 @@
                 </div>
                 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                     <ul id="nav" class="text-xl md:text-2xl lg:flex-grow hidden lg:inline-flex">
+
+                        {% for menu in menus %}
+                            {% if menu.subMenus.count > 0 %}
+                                <div>
+                                    <a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">{{ menu.name }}</a>
+                                    <ul>
+                                        {% for subMenu in menu.subMenus %}
+                                            <li>
+                                                <a href="{{ subMenu|menuLink }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">{{ subMenu.name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <li>
+                                    <a href="{{ menu|menuLink }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">{{ menu.name }}</a>
+                                </li>
+
+                            {% endif %}
+                        {% endfor %}
+
                     <li>
                     <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
                         My blog
