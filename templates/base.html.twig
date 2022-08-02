@@ -1,12 +1,5 @@
 {% set menus = menu_service.findAll %}
 
-{# {% for menu in menus %}
-    {{ dump(menu.subMenus.count) }}
-     {% for subMenu in menu.subMenus %}
-        {{ dump(subMenu) }}
-     {% endfor %}
-{% endfor %} #}
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,7 +15,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="text-xl md:text-2xl bg-primary text-gray-50 ">
+    <body class="text-xl md:text-2xl bg-primary">
         <header class="">
             <nav class="flex items-center justify-between flex-wrap bg-gray-50 p-6">
                 <div class="flex items-center flex-shrink-0 text-primary mr-6">
@@ -73,22 +66,46 @@
 
                             {% endif %}
                         {% endfor %}
-
-                    <li>
-                    <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
-                        My blog
-                    </a>
-                    </li>
-                    <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
-                        Category
-                    </a>
-                    <a href="{{ path('admin') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300">
-                        Dashboard
-                    </a>
+                    </ul>
+                    <ul class="mr-8">
+                        <li>
+                            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
+                                My blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ ea_index('MenuCrudController') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
+                                Menus
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300">
+                                Dashboard
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <ul class="flex">
+                        
+                        <li class="mr-5">
+                            <a href="{{ path('app_register') }}" class="inline-block text-xl md:text-2xl px-4 py-2 leading-none border rounded text-primary border-primary hover:border-transparent hover:text-white hover:bg-primary mt-4 lg:mt-0">Register</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_login') }}" class="inline-block text-xl md:text-2xl px-4 py-2 leading-none border rounded text-primary border-primary hover:border-transparent hover:text-white hover:bg-primary mt-4 lg:mt-0">Login</a>
+                        </li>
+                    </ul>
+                {% else %}
+                    <div class="">
+                         <a href="{{ path('app_profile', { username: app.user.username }) }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">My Profile</a>
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_logout') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">Logout</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div>
-                    <a href="#" class="inline-block text-xl md:text-2xl px-4 py-2 leading-none border rounded text-primary border-primary hover:border-transparent hover:text-white hover:bg-primary mt-4 lg:mt-0">Se connecter</a>
-                    </div>
+                {% endif %}
                 </div>
             </nav>
         </header>

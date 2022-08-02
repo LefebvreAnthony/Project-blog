@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <main class="w-1/3">
+        <div>
+            <div>
+                <h2>{{ user.username|capitalize}} Profile</h2>
+                <div>
+                    <label for="username">Username</label>
+                </div>
+                <div>
+                    <div>
+                        <span>hello</span>
+                        <input type="text" value="{{ user.username }}" readonly>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p>Nuber of comments posted : {{ user.comments|length }}</p>
+            </div>
+        </div>
+    </main>
+{% endblock %}
