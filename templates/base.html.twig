@@ -67,23 +67,22 @@
                             {% endif %}
                         {% endfor %}
                     </ul>
-                    <ul class="mr-8">
-                        <li>
-                            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
-                                My blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ ea_index('MenuCrudController') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
-                                Menus
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300">
-                                Dashboard
-                            </a>
-                        </li>
-                    </ul>
+                    {% if is_granted('ROLE_AUTHOR') %}
+                        <ul class="mr-8">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li>
+                                    <a href="{{ ea_index('MenuCrudController') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">
+                                        Menus
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="{{ path('admin') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300">
+                                    Dashboard
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
                 </div>
                 <div>
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -98,7 +97,7 @@
                     </ul>
                 {% else %}
                     <div class="">
-                         <a href="{{ path('app_profile', { username: app.user.username }) }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">My Profile</a>
+                         <a href="{{ path('app_profile', { username: app.user.username }) }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">{{ app.user.username}}</a>
                         <ul>
                             <li>
                                 <a href="{{ path('app_logout') }}" class="block mt-4 lg:inline-block lg:mt-0 text-primary hover:text-gray-300 mr-4">Logout</a>
